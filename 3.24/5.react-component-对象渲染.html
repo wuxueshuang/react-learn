@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box{
+				border:2px solid #ccc;
+				padding:5px;
+				margin-bottom:10px;
+			}
+			#box2{
+				border:2px solid yellow;
+				padding:5px;
+			}
+		</style>
+		<script src = "../src/react.development.js"></script>
+		<script src = "../src/react-dom.development.js"></script>
+		<script src = "../src/babel.min.js"></script>
+	</head>
+
+	<body>
+		<div id = "box"></div>
+		<div id = "box2"></div>
+		<script type = "text/babel">
+			let obj1 = {
+				title:"北京欢迎你",
+				list:[123,123,123,123,123],
+				a:1,
+				b:5556
+			}
+			let obj2 = {
+				title:"Hello World!",
+				list:["Apple","Banana","Orange","Melon","Pear"]
+			}
+			class List extends React.Component{
+				render(){
+					return(
+						<ul>
+							{
+								this.props.list.map(function (item,index){
+									return <li data-id = {index} key = {index}>{item}</li>
+								})
+							}
+						</ul>
+						)
+				}
+			}
+			ReactDOM.render(
+				<List {...obj1}></List>,
+				document.getElementById("box")
+			)
+
+			class Hello extends React.Component{
+				render(){
+					return (
+						<div>
+							<h2 title = {this.props.title}>{this.props.title}</h2>
+							<List list = {this.props.list}></List>
+						</div>
+						)
+				}
+			}
+			ReactDOM.render(
+				<div>
+					<Hello {...obj2}></Hello>
+					<Hello {...obj1}></Hello>
+				</div>,
+				document.getElementById("box2")				
+			)
+		</script>
+	</body>
+</html>

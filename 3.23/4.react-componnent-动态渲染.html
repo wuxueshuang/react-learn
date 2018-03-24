@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src = "../src/react.development.js"></script>
+		<script src = "../src/react-dom.development.js"></script>
+		<script src = "../src/babel.min.js"></script>
+	</head>
+
+	<body>
+		<div id = "box">
+			<!-- <h2>Hello World!</h2>
+			<ul>
+				<li>123</li>
+				<li>123</li>
+				<li>123</li>
+				<li>123</li>
+			</ul> -->			
+		</div>
+		<div id = "box2"></div>
+		<div id = "box3"></div>
+		<script type = "text/babel">
+			let title = "Hello World!";
+			let title2 = "我是改变的";
+			let list1 = [123,123,123,123,123];
+			let list2 = ["Apple","Banana","Orange","Melon","Pear"];
+			class List extends React.Component{
+				render(){
+					return(
+						<ul>
+							{
+								this.props.custom.map(function (item,index){
+									return <li key = {index}>{item}</li>
+								})
+							}
+						</ul>
+						)
+				}
+			}
+			// <List custom = {this.props.list}></List>
+			class Hello extends React.Component{
+				render(){
+					return (
+						<div>
+							<h2 title = {this.props.title}>{this.props.title||"我是默认的"}</h2>
+							<List custom = {this.props.list}></List>
+						</div>
+						)
+
+				}
+			}
+			ReactDOM.render(
+				<List custom = {list1}></List>,
+				document.getElementById("box")
+				);
+			ReactDOM.render(
+				<Hello title = {title} list = {list2}></Hello>,
+				document.getElementById("box2")
+				);
+			ReactDOM.render(
+				<div>
+					<Hello title = {title2} list = {list1}></Hello>
+					<List custom = {list2}></List>
+				</div>,
+				document.getElementById("box3")
+				);
+		</script>
+	</body>
+</html>

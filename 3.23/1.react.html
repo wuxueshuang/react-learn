@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>1.react</title>
+		<style>
+			.red{
+				color:red;
+			}
+			.bgred{
+				background:red;
+			}
+			.my-img{
+				width:300px;
+				height:400px;
+				border:3px solid yellow;
+			}
+		</style>
+		<script src = "../src/react.development.js"></script>
+		<script src = "../src/react-dom.development.js"></script>
+		<script src = "../src/babel.min.js"></script>
+	</head>
+
+	<body>
+	<div id = "box">
+		<!-- <h2>Hello World！</h2> -->
+	</div>
+	<div class = "box2" id = "box2"></div>
+	<div class = "box3" ></div>
+	<script type = "text/babel">
+		// let h2 = React.createElement("h2",{className : "red"},"hello,world!");
+		// ReactDOM.render(
+		// 	h2,
+		// 	document.getElementById("box")
+		// 	);
+		let h2 = React.createElement("h2",{className:"bgred"},"Hello World！");
+		ReactDOM.render(
+			h2,
+			document.getElementById("box")
+		);
+		let html = 
+		<div>
+			<div className = "red">1234564</div>
+			<ul>
+				<li>100000</li>
+				<li>111111</li>
+				<li>122222</li>
+				<li>133333</li>
+				<li>144444</li>
+				<li>
+					<a href = "javascript:;">百度</a>
+					<img className = "my-img" src = "../img/3.jpg"/>
+				</li>
+			</ul>
+		</div>
+		ReactDOM.render(
+				html,
+				document.getElementById("box")
+			)
+		let html2 = 
+		<div className = "bgred">
+			<h2>我是render的</h2>
+			<ul>
+				<li>0000</li>
+				<li>1111</li>
+				<li>2222</li>
+				<li>3333</li>
+				<li>4444</li>
+			</ul>
+			<img className = "my-img" src = "../img/3.jpg" />
+		</div>
+		ReactDOM.render(
+			html2,
+			document.getElementsByClassName("box3")[0]
+			)
+	</script>
+	</body>
+</html>

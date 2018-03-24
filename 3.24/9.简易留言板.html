@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			.delBtn{
+				margin-left:20px;
+				padding:5px;
+				border-radius:10%;
+			}
+			ul{
+				list-style:none;
+			}
+			li{
+				margin-bottom:15px;
+			}
+		</style>
+		<script src = "../src/react.development.js"></script>
+		<script src = "../src/react-dom.development.js"></script>
+		<script src = "../src/babel.min.js"></script>
+	</head>
+
+	<body>
+		<div id = 'box'>
+			<!-- <div>
+				<input type = "text" />
+			</div>
+			<ul>
+				<li>
+					<span>00000000000</span>
+					<input type = "button" value = "X" />
+				</li>
+			</ul> -->
+		</div>
+		<script type = "text/babel">
+			/*
+				简易留言板结构划分：
+					1.根组件：
+						2.头部：
+						3.内容区：
+							4.单条数据；
+							4.单条数据；
+							4.单条数据；
+							4.单条数据；
+
+			*/
+			/*-------------头部组件 start--------------*/
+				class MessageHeader extends React.Component{								
+					getValueHandler(ev){
+						if(ev.keyCode === 13){
+							console.log(ev.target.value);
+							this.props.getValueHandlerParent(ev.target.value)
+						}
+
+					}
+					
+					render(){						
+						return (
+							<div>
+								<input type = "text" onKeyDown = {this.getValueHandler.bind(this)} />
+							</div>
+						)
+					}
+				}
+			/*-------------头部组件 end--------------*/
+
+			/*-------------每一项组件 start--------------*/
+				class MessageItem extends React.Component{
+					
+					render(){
+						return (
+							<li data-id = {this.props.index1}>
+								<span>{this.props.text}</span>
+								<input type = "button" value = "删除" className= "delBtn" />
+							</li>
+						)
+					}
+				}
+			/*-------------每一项组件 end--------------*/
+
+			/*-------------内容组件 start--------------*/
+				class MessageContent extends React.Component{
+					render(){
+						return (
+							<ul>
+								{
+									this.props.list.map(function (item,index){										
+										return <MessageItem key = {index} text = {item} index1 = {index}></MessageItem>
+									})
+								}
+							</ul>
+						)
+					}
+				}
+			/*-------------内容组件 end--------------*/
+
+			/*-------------留言板根组件 start--------------*/
+				class MessageRoot extends React.Component{
+					constructor(props){
+						super();
+						this.state={
+							list:list
+						}
+					}
+					//	定义方法：这个方法在自己的MessageHeader中触发	
+					getValueHandlerParent(val){
+						console.log("parent:" + val);
+						//父级中的函数this指向谁？
+						console.log(this,"getValueHandlerParent+this");
+						// this.props.list.push(val);//这个props是不允许改变的
+						console.log(this.props.list,"@11111");
+						let newList = this.state.list.push(val)
+						//更新组件只有一个途径就是改变状态
+						this.setState(
+							list:newList
+						);
+						console.log(this.state.list);
+					}
+					render(){
+						return (
+							<div>
+								<h2>留言板</h2>
+								<MessageHeader getValueHandlerParent = {this.getValueHandlerParent.bind(this)} ></MessageHeader>
+								<MessageContent list = {this.props.list} ></MessageContent>
+							</div>
+						)
+					}
+				}
+			/*-------------留言板根组件 end--------------*/
+
+			let list = [123,456,789,987,258,369,159];
+			ReactDOM.render(
+				<MessageRoot list = {list} ></MessageRoot>,
+				document.getElementById("box")
+			)
+		</script>
+
+	</body>
+</html>

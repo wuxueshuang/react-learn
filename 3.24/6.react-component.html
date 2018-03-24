@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <style>
+			#box{
+				border:2px solid #ccc;
+				padding:20px;
+				margin-bottom:10px;
+			}
+			#box2{
+				border:2px solid yellow;
+				padding:20px;
+			}
+		</style>
+		<script src = "../src/react.development.js"></script>
+		<script src = "../src/react-dom.development.js"></script>
+		<script src = "../src/babel.min.js"></script>
+	</head>
+
+	<body>
+		<div id = "box"></div>
+		<div id = "box2"></div>
+		<script type = "text/babel">
+			class Btn extends React.Component{
+				render(){
+					let title = '提交';
+					let style = {width:"100px",height:"60px",fontSize:"30px",borderRadius:"10%"}
+					let html = <div style = {style}></div>
+					if(this.props.type === "text"){
+						html = <input type = "text"   placeholder = {this.props.title}/>
+					}else if(this.props.type === "btn"){
+						html = <button style = {style}>{this.props.title||"点击"}</button>
+					}else if(this.props.type === "checkbox"){
+						html = <input type = "checkbox" />
+					}
+					return html;
+				}
+			}
+			ReactDOM.render(
+				<div>
+					<Btn type = "btn" title = "按钮"></Btn>
+					<Btn type = "text" title = "按钮"></Btn>
+					<Btn type = "checkbox" title = "按钮"></Btn>
+				</div>,
+				document.getElementById("box")
+			)
+		</script>
+	</body>
+</html>

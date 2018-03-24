@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script src = "../src/react.development.js"></script>
+		<script src = "../src/react-dom.development.js"></script>
+		<script src = "../src/babel.min.js"></script>
+	</head>
+
+	<body>
+	<div id = "box">
+		<!-- <h2>Hello,World!</h2> -->
+	</div>
+	<div id = "box2">
+		<!-- <h2>Hello,World!</h2> -->
+	</div>
+	<script type = "text/babel">
+		// v-for第一种方法：根据单个变量：数组进行循环
+		let title = "Hello，World!";
+		let list = [1111,2222,3333,4444,10000];
+		let html = 
+		<div>
+			<h2>{title}</h2>
+			<ul>
+				{
+					list.map(function (item,index){
+						return <li title={title} key={index}>{item}</li>
+							
+					})
+				}
+			</ul>			
+		</div>
+		ReactDOM.render(
+				html,
+				document.getElementById("box")
+			)
+
+		// v-for第二种方法：根据对象中的数组进行循环
+		let obj = {
+			title:"hello world",
+			list:[1111,2222,3333,4444,10000]
+		}
+		let html2 = 
+			<div>
+				<h2>{obj.title}</h2>
+				<ul>
+					{
+						obj.list.map(function (item,index){
+							return <li title = {obj.title} key = {index}>{item}</li>
+						})
+					}
+				</ul>
+			</div>
+		ReactDOM.render(
+			html2,
+			document.getElementById("box2")
+			);
+	</script>
+	</body>
+</html>

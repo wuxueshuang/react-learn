@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#box{
+				border:2px solid #ccc;
+				padding:20px;
+				margin-bottom:10px;
+			}
+			#box2{
+				border:2px solid yellow;
+				padding:20px;
+			}	
+		</style>
+		<script src = "../src/react.development.js"></script>
+		<script src = "../src/react-dom.development.js"></script>
+		<script src = "../src/babel.min.js"></script>
+	</head>
+
+	<body>
+		<div id = "box">
+			<!-- <input type = "text" /> -->
+		</div>
+
+		<script type = "text/babel">
+			class InputBoth extends React.Component{
+				constructor(props){
+					super();
+					this.state={
+						val:'123',
+						val2:""
+					}
+				}
+				changeVal(ev){
+					this.setState({
+						val:ev.target.value
+					})
+				}
+				changeVal2(ev){
+					this.setState({
+						val2:ev.target.value
+					})
+				}
+				render(){
+					return (
+						<div>
+							<input type="text" value={this.state.val} onChange={this.changeVal.bind(this)} onBlur={this.changeVal2.bind(this)}/>
+							<p>输入中改变:{this.state.val}</p>
+							<p>失去焦点改变：{this.state.val2}</p>
+						</div>
+					)
+						
+				}
+			}
+			
+			ReactDOM.render(
+				<InputBoth></InputBoth>,
+				document.getElementById("box")
+			)
+		</script>
+
+	</body>
+</html>
